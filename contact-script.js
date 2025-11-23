@@ -1,7 +1,10 @@
 // Contact Form Functionality
 document.addEventListener('DOMContentLoaded', function() {
+    
+  const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1441875935866523881/UdgG9g40LQrV2aZbCofCxEwuC5NZld3AnhE3w5SApMqBRgTAIfxA5fwmqWUauNQwAc6A';
+
   // Form validation and submission
-  window.handleSubmit = function() {
+  window.handleSubmit = async function() {
     const firstName = document.getElementById('firstName').value.trim();
     const lastName = document.getElementById('lastName').value.trim();
     const email = document.getElementById('email').value.trim();
@@ -20,18 +23,85 @@ document.addEventListener('DOMContentLoaded', function() {
       showNotification('Please enter a valid email address', 'error');
       return;
     }
+
+    // Desabilitar botão enquanto envia
+    const sendButton = document.querySelector('.send-button');
+    const originalButtonContent = sendButton.innerHTML;
+    sendButton.disabled = true;
+    sendButton.innerHTML = '<span>Sending...</span>';
+    sendButton.style.opacity = '0.6';
+    sendButton.style.cursor = 'not-allowed';
     
-    // Simular envio (você pode adicionar integração real aqui)
-    showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
-    
-    // Limpar formulário
-    setTimeout(() => {
-      document.getElementById('firstName').value = '';
-      document.getElementById('lastName').value = '';
-      document.getElementById('email').value = '';
-      document.getElementById('subject').value = '';
-      document.getElementById('message').value = '';
-    }, 1500);
+    try {
+      // Criar embed para Discord
+      const embed = {
+        title: "📧 New Contact Form Submission",
+        color: 0x51A2FF,
+        fields: [
+          {
+            name: "👤 Name",
+            value: `${firstName} ${lastName}`,
+            inline: true
+          },
+          {
+            name: "📧 Email",
+            value: email,
+            inline: true
+          },
+          {
+            name: "📝 Subject",
+            value: subject,
+            inline: false
+          },
+          {
+            name: "💬 Message",
+            value: message.length > 1024 ? message.substring(0, 1021) + "..." : message,
+            inline: false
+          }
+        ],
+        timestamp: new Date().toISOString(),
+        footer: {
+          text: "Portfolio Contact Form"
+        }
+      };
+      
+      // Enviar para Discord
+      const response = await fetch(DISCORD_WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: 'CaptainHook',
+          avatar_url: 'https://cdn.discordapp.com/embed/avatars/0.png',
+          embeds: [embed]
+        })
+      });
+      
+      if (response.ok || response.status === 204) {
+        showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
+        
+        // Limpar formulário após sucesso
+        setTimeout(() => {
+          document.getElementById('firstName').value = '';
+          document.getElementById('lastName').value = '';
+          document.getElementById('email').value = '';
+          document.getElementById('subject').value = '';
+          document.getElementById('message').value = '';
+        }, 1000);
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      showNotification('Failed to send message. Please try again or contact me directly via email.', 'error');
+    } finally {
+      // Reabilitar botão
+      sendButton.disabled = false;
+      sendButton.innerHTML = originalButtonContent;
+      sendButton.style.opacity = '1';
+      sendButton.style.cursor = 'pointer';
+    }
   };
   
   // Função para mostrar notificações
@@ -62,7 +132,9 @@ document.addEventListener('DOMContentLoaded', function() {
       transition: 'opacity 0.3s ease',
       boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3)',
       color: '#FFFFFF',
-      fontFamily: 'Poppins, sans-serif'
+      fontFamily: 'Poppins, sans-serif',
+      maxWidth: '500px',
+      textAlign: 'center'
     });
     
     if (type === 'success') {
@@ -78,13 +150,13 @@ document.addEventListener('DOMContentLoaded', function() {
       notification.style.opacity = '1';
     }, 10);
     
-    // Remover notificação após 3 segundos
+    // Remover notificação após 4 segundos
     setTimeout(() => {
       notification.style.opacity = '0';
       setTimeout(() => {
         notification.remove();
       }, 300);
-    }, 3000);
+    }, 4000);
   }
   
   // Adicionar efeito de foco nos inputs
