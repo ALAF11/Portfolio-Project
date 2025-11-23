@@ -99,7 +99,7 @@ body {
 .contact-main {
   position: relative;
   z-index: 2;
-  padding-top: 100px;
+  padding-top: 120px;
   max-width: 1400px;
   margin: 0 auto;
   padding-left: 50px;
@@ -124,7 +124,7 @@ body {
 
 .title-underline {
   height: 3.5px;
-  width: 120px;
+  width: 100px;
   background: linear-gradient(to right, #00d492, #51a2ff);
   border-radius: 2px;
   margin: 0 auto 18px;
