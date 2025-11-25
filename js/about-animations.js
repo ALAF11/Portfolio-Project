@@ -2,6 +2,18 @@
 document.addEventListener('DOMContentLoaded', function() {
   const galleryImages = document.querySelectorAll('.gallery-img');
   const contentContainers = document.querySelectorAll('.content-container');
+
+  // Verificar se é mobile
+  const isMobile = window.innerWidth <= 768;
+  
+  // Se for mobile, não aplicar animações
+  if (isMobile) {
+    // Mostrar todas as imagens no mobile
+    galleryImages.forEach(img => {
+      img.style.cursor = 'default';
+    });
+    return;
+  }
   
   // Estado atual
   let currentState = 'main';
