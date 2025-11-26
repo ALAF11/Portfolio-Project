@@ -197,7 +197,14 @@ body::before {
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  opacity: 0;
+  transform: translateY(40px);
 }
+
+.expertise-card.animate {
+  animation: jumpIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
 
 .expertise-card:hover {
   transform: translateY(-8px);
@@ -353,6 +360,12 @@ body::before {
   margin-bottom: 60px;
   position: relative;
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.github-button.animate {
+  animation: fadeInUp 0.6s ease-out forwards;
 }
 
 .github-button::before {
@@ -452,7 +465,28 @@ body::before {
   font-weight: 400;
   letter-spacing: -0.0179px;
   transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
 }
+
+.tech-tag.animate {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.tech-tag:nth-child(1).animate { animation-delay: 0s; }
+.tech-tag:nth-child(2).animate { animation-delay: 0.05s; }
+.tech-tag:nth-child(3).animate { animation-delay: 0.1s; }
+.tech-tag:nth-child(4).animate { animation-delay: 0.15s; }
+.tech-tag:nth-child(5).animate { animation-delay: 0.2s; }
+.tech-tag:nth-child(6).animate { animation-delay: 0.25s; }
+.tech-tag:nth-child(7).animate { animation-delay: 0.3s; }
+.tech-tag:nth-child(8).animate { animation-delay: 0.35s; }
+.tech-tag:nth-child(9).animate { animation-delay: 0.4s; }
+.tech-tag:nth-child(10).animate { animation-delay: 0.45s; }
+.tech-tag:nth-child(11).animate { animation-delay: 0.5s; }
+.tech-tag:nth-child(12).animate { animation-delay: 0.55s; }
+.tech-tag:nth-child(13).animate { animation-delay: 0.6s; }
+.tech-tag:nth-child(14).animate { animation-delay: 0.65s; }
 
 .tech-tag:hover {
   background: rgba(81, 162, 255, 0.35);
@@ -469,6 +503,35 @@ body::before {
   text-align: center;
   margin-top: 50px;
   letter-spacing: 0.2px;
+}
+
+@keyframes jumpIn {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-10px);
+  }
+  80% {
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Responsive - Tablets */

@@ -1,19 +1,29 @@
 // About Page Animations - Image Gallery State Management
 document.addEventListener('DOMContentLoaded', function() {
+
+  // Adicionar efeito de cursor suave
+  const cursorLight = document.querySelector('.cursor-light');
+  
+  if (cursorLight) {
+    document.addEventListener('mousemove', (e) => {
+      cursorLight.style.left = e.clientX + 'px';
+      cursorLight.style.top = e.clientY + 'px';
+    });
+
+    document.addEventListener('mouseleave', () => {
+      cursorLight.style.opacity = '0';
+    });
+
+    document.addEventListener('mouseenter', () => {
+      cursorLight.style.opacity = '1';
+    });
+  }
+
   const galleryImages = document.querySelectorAll('.gallery-img');
   const contentContainers = document.querySelectorAll('.content-container');
 
   // Verificar se é mobile
   const isMobile = window.innerWidth <= 768;
-  
-  // Se for mobile, não aplicar animações
-  if (isMobile) {
-    // Mostrar todas as imagens no mobile
-    galleryImages.forEach(img => {
-      img.style.cursor = 'default';
-    });
-    return;
-  }
   
   // Estado atual
   let currentState = 'main';
@@ -97,14 +107,43 @@ document.addEventListener('DOMContentLoaded', function() {
     
     currentState = newState;
   }
+
+  // Variável para controlar se o hint já foi escondido
+  const galleryHint = document.querySelector('.gallery-hint');
+  let hintHidden = false;
+
+  // Se for mobile, não aplicar animações de galeria mas manter funcionalidade do hint
+  if (isMobile) {
+    // Mostrar todas as imagens no mobile
+    galleryImages.forEach(img => {
+      img.style.cursor = 'default';
+      
+      // Ainda permitir esconder o hint ao clicar
+      img.addEventListener('click', function() {
+        if (!hintHidden && galleryHint) {
+          galleryHint.classList.add('hidden');
+          hintHidden = true;
+        }
+      });
+    });
+    return;
+  }
   
-  // Adicionar event listeners para as imagens
+  // Adicionar event listeners para as imagens (DESKTOP)
   galleryImages.forEach(img => {
     img.style.cursor = 'pointer';
     
     img.addEventListener('click', function() {
       const state = this.dataset.state;
       animateToState(state);
+      
+      // Esconder hint após primeira interação
+      if (!hintHidden && galleryHint) {
+        setTimeout(() => {
+          galleryHint.classList.add('hidden');
+          hintHidden = true;
+        }, 300);
+      }
     });
     
     // Efeito hover mais pronunciado na imagem ativa

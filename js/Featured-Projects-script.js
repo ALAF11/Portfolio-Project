@@ -18,7 +18,36 @@ document.addEventListener('DOMContentLoaded', function() {
       cursorLight.style.opacity = '1';
     });
   }
+
+  // Scroll Animation Observer
+  setupScrollAnimations();
 });
+
+// Scroll Animation Observer
+function setupScrollAnimations() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate');
+        // Opcional: parar de observar após animar
+        // observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observar os cards do grid (quando não está em carousel)
+  const cards = document.querySelectorAll('.projects-grid .project-card');
+  cards.forEach((card, index) => {
+    // Adicionar delay progressivo mais lento aos cards
+    card.style.animationDelay = `${index * 0.25}s`;
+    observer.observe(card);
+  });
+}
 
 // Carousel Functionality
   const carousel = document.querySelector('.projects-carousel');
@@ -45,6 +74,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add active class to current slide and dot
     slides[index].classList.add('active');
     dots[index].classList.add('active');
+
+    // Animar os cards dentro do slide ativo
+  const activeCards = slides[index].querySelectorAll('.project-card');
+  activeCards.forEach((card, cardIndex) => {
+    // Reset animation
+    card.style.animation = 'none';
+    card.offsetHeight; // Trigger reflow
+    card.style.animation = null;
+    card.style.animationDelay = `${cardIndex * 0.25}s`;
+  });
     
     currentSlide = index;
   }
@@ -121,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
     showSlide(0);
   }
 
-// Optional: Add smooth scroll behavior
+// Add smooth scroll behavior
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();

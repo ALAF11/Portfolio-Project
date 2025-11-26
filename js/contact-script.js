@@ -1,5 +1,23 @@
 // Contact Form Functionality
 document.addEventListener('DOMContentLoaded', function() {
+
+  // Adicionar efeito de cursor suave
+  const cursorLight = document.querySelector('.cursor-light');
+  
+  if (cursorLight) {
+    document.addEventListener('mousemove', (e) => {
+      cursorLight.style.left = e.clientX + 'px';
+      cursorLight.style.top = e.clientY + 'px';
+    });
+
+    document.addEventListener('mouseleave', () => {
+      cursorLight.style.opacity = '0';
+    });
+
+    document.addEventListener('mouseenter', () => {
+      cursorLight.style.opacity = '1';
+    });
+  }
     
   const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1441875935866523881/UdgG9g40LQrV2aZbCofCxEwuC5NZld3AnhE3w5SApMqBRgTAIfxA5fwmqWUauNQwAc6A';
 
