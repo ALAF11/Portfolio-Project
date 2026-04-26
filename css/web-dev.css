@@ -540,6 +540,47 @@ body::before {
   }
 }
 
+/* Hamburger Button */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 200;
+  position: relative;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #9aa1af;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.nav-toggle.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.nav-toggle.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+body.nav-open {
+  overflow: hidden;
+}
+
 /* Responsive - Large Screens */
 @media (max-width: 1400px) {
   .projects-grid {
@@ -549,15 +590,14 @@ body::before {
 
 /* Responsive - Tablets */
 @media (max-width: 1024px) {
- 
   .projects-carousel-wrapper {
     padding: 0 50px;
   }
 
   .projects-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    max-width: 550px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 100%;
   }
 
   .carousel-arrow {
@@ -573,11 +613,11 @@ body::before {
   .navigation {
     padding: 15px 30px;
   }
-  
+
   .nav-links {
     gap: 30px;
   }
-  
+
   .nav-link {
     font-size: 16px;
   }
@@ -589,9 +629,49 @@ body::before {
 
 /* Responsive - Mobile */
 @media (max-width: 768px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .navigation {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+  }
+
+  .logo-img {
+    width: 160px;
+    right: 0;
+  }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 15, 28, 0.97);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    z-index: 150;
+    margin-top: 0;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-link {
+    font-size: 26px;
+  }
 
   .projects-carousel-wrapper {
-    padding: 0 40px;
+    padding: 0 44px;
   }
 
   .carousel-arrow {
@@ -619,52 +699,30 @@ body::before {
     width: 12px;
     height: 12px;
   }
-    
+
   .main-content {
     padding: 20px 15px 40px;
   }
 
-  .navigation {
-    flex-direction: column;
-    gap: 20px;
-    padding: 15px 25px;
-  }
-
-  .logo-circle {
-    width: 80px;
-    height: 80px;
-  }
-
-  .logo-container {
-    width: 80px;
-    height: 80px;
-  }
-
-  .nav-links {
-    gap: 20px;
-  }
-
-  .nav-link {
-    font-size: 16px;
-  }
-
   .header-section {
-    margin-top: 200px;
-    margin-bottom: 40px;
+    margin-top: 80px;
+    margin-bottom: 30px;
   }
 
   .page-title {
-    font-size: 36px;
+    font-size: 32px;
   }
 
   .page-subtitle {
-    font-size: 15px;
+    font-size: 14px;
     line-height: 22px;
     padding: 0 10px;
   }
 
   .projects-grid {
-    gap: 30px;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    max-width: 520px;
     padding: 0 10px;
   }
 
@@ -673,7 +731,7 @@ body::before {
   }
 
   .card-title {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .card-description {
@@ -683,26 +741,30 @@ body::before {
 
   .Copyright {
     font-size: 14px;
-    margin-top: 0px;
+    margin-top: 10px;
   }
 }
 
 /* Responsive - Small Mobile */
 @media (max-width: 480px) {
+  .projects-carousel-wrapper {
+    padding: 0 36px;
+  }
+
   .page-title {
-    font-size: 32px;
+    font-size: 26px;
   }
 
   .page-subtitle {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .card-header {
-    gap: 10px;
+    gap: 8px;
   }
 
   .card-title {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .card-icon-btn {
