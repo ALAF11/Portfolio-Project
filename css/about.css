@@ -514,109 +514,45 @@ body {
   }
 }
 
-/* Responsive - Mobile */
-@media (max-width: 768px) {
-  .navigation {
-    flex-direction: column;
-    gap: 20px;
-    padding: 15px 25px;
-  }
+/* Hamburger Button */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 200;
+  position: relative;
+}
 
-  .nav-links {
-    gap: 20px;
-  }
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #9aa1af;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
 
-  .nav-link {
-    font-size: 16px;
-  }
+.nav-toggle.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
 
-  .about-main {
-    margin-top: 30px;
-    padding-left: 25px;
-    padding-right: 25px;
-    padding-top: 160px;
-  }
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
 
-  .hero-section {
-    grid-template-columns: 1fr;
-  }
+.nav-toggle.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
 
-  .hero-intro,
-  .hero-title,
-  .hero-description {
-    grid-column: 1;
-  }
-
-  .hero-title {
-    font-size: 36px;
-  }
-
-  .hero-description {
-    font-size: 16px;
-    line-height: 26px;
-  }
-
-  .image-gallery {
-    position: relative;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: auto;
-    margin-bottom: 60px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-  }
-
-  .gallery-img {
-    position: relative !important;
-    left: 0 !important;
-    top: 0 !important;
-    transform: none !important;
-  }
-
-  .main-photo {
-    width: 100% !important;
-    max-width: 320px !important;
-    height: 320px !important;
-    opacity: 1 !important;
-  }
-
-  .graduation {
-    width: 100% !important;
-    max-width: 280px !important;
-    height: 373px !important;
-    opacity: 1 !important;
-    display: block !important;
-  }
-
-  .family {
-    width: 100% !important;
-    max-width: 280px !important;
-    height: 351px !important;
-    opacity: 1 !important;
-    display: block !important;
-  }
-
-  .skills-section {
-    grid-template-columns: 1fr;
-    margin-left: 0;
-    max-width: 100%;
-  }
-
-  .gallery-hint {
-    position: relative;
-    left: 0;
-    top: 0;
-    margin: 20px auto;
-    max-width: 100%;
-    font-size: 13px;
-    padding: 10px 16px;
-    text-align: center;
-    justify-content: center;
-  }
-
+body.nav-open {
+  overflow: hidden;
 }
 
 /* Responsive - Tablet */
@@ -652,5 +588,166 @@ body {
 
   .skills-section {
     gap: 20px;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .navigation {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+  }
+
+  .logo-img {
+    width: 160px;
+    right: 0;
+  }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 15, 28, 0.97);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    z-index: 150;
+    margin-top: 0;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-link {
+    font-size: 26px;
+  }
+
+  .about-main {
+    margin-top: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 90px;
+  }
+
+  .hero-section {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-intro,
+  .hero-title,
+  .hero-description {
+    grid-column: 1;
+  }
+
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .hero-description {
+    font-size: 15px;
+    line-height: 26px;
+  }
+
+  .hero-description .emphasis {
+    font-size: 18px;
+  }
+
+  .image-gallery {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .gallery-img {
+    position: relative !important;
+    left: 0 !important;
+    top: 0 !important;
+    transform: none !important;
+  }
+
+  .main-photo {
+    width: 100% !important;
+    max-width: 300px !important;
+    height: 300px !important;
+    opacity: 1 !important;
+  }
+
+  .graduation {
+    width: 100% !important;
+    max-width: 260px !important;
+    height: 340px !important;
+    opacity: 1 !important;
+    display: block !important;
+  }
+
+  .family {
+    width: 100% !important;
+    max-width: 260px !important;
+    height: 325px !important;
+    opacity: 1 !important;
+    display: block !important;
+  }
+
+  .skills-section {
+    grid-template-columns: 1fr;
+    margin-left: 0;
+    max-width: 100%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  .gallery-hint {
+    position: relative;
+    left: 0;
+    top: 0;
+    margin: 16px auto;
+    max-width: 100%;
+    font-size: 13px;
+    padding: 10px 16px;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* Responsive - Small Mobile */
+@media (max-width: 480px) {
+  .about-main {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .intro-label {
+    font-size: 15px;
+  }
+
+  .skills-section {
+    gap: 16px;
+  }
+
+  .skill-card {
+    padding: 14px 18px 16px;
   }
 }
