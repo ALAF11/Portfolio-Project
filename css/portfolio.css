@@ -616,11 +616,11 @@ body.nav-open {
   }
 
   .navigation::before {
-    height: 96px;
+    height: 104px;
   }
 
   .logo-link {
-    height: 64px;
+    height: 72px;
     margin-left: -55px;
     overflow: hidden;
   }
@@ -628,6 +628,7 @@ body.nav-open {
   .logo-img {
     width: 180px;
     right: 0;
+    top: 7px;
   }
 
   .nav-links {
