@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
     
-  const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1441875935866523881/UdgG9g40LQrV2aZbCofCxEwuC5NZld3AnhE3w5SApMqBRgTAIfxA5fwmqWUauNQwAc6A';
+  const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1565030625604538538/nzHh6-jC68ZDAhI9lue5Tgo3cTb9y0TinaZTcL7B0QV_mS4y4xUvP8v9xLvC1joYAs-C';
 
   // Form validation and submission
   window.handleSubmit = async function() {

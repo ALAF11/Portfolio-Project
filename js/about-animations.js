@@ -71,7 +71,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Animar family
     Object.assign(family.style, config.family);
-    
+
+    switchContent(newState);
+  }
+
+  // Troca o texto e a foto ativa (usado no desktop e no mobile)
+  function switchContent(newState) {
+    if (newState === currentState) return;
+
     // Fade out conteúdo atual
     const currentContent = document.querySelector(`.content-container[data-content="${currentState}"]`);
     const newContent = document.querySelector(`.content-container[data-content="${newState}"]`);
@@ -116,10 +123,17 @@ document.addEventListener('DOMContentLoaded', function() {
   if (isMobile) {
     // Mostrar todas as imagens no mobile
     galleryImages.forEach(img => {
-      img.style.cursor = 'default';
-      
-      // Ainda permitir esconder o hint ao clicar
+      img.style.cursor = 'pointer';
+
       img.addEventListener('click', function() {
+        const changed = this.dataset.state !== currentState;
+        switchContent(this.dataset.state);
+
+        if (changed) {
+          const heroIntro = document.querySelector('.hero-intro');
+          if (heroIntro) heroIntro.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
         if (!hintHidden && galleryHint) {
           galleryHint.classList.add('hidden');
           hintHidden = true;
