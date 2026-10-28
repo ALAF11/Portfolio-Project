@@ -615,8 +615,18 @@ body.nav-open {
     padding: 12px 20px;
   }
 
+  .navigation::before {
+    height: 96px;
+  }
+
+  .logo-link {
+    height: 64px;
+    margin-left: -55px;
+    overflow: hidden;
+  }
+
   .logo-img {
-    width: 160px;
+    width: 180px;
     right: 0;
   }
 

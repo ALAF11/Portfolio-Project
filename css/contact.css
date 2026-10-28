@@ -569,8 +569,18 @@ body.nav-open {
     padding: 12px 20px;
   }
 
+  .navigation::before {
+    height: 96px;
+  }
+
+  .logo-link {
+    height: 64px;
+    margin-left: -55px;
+    overflow: hidden;
+  }
+
   .logo-img {
-    width: 160px;
+    width: 180px;
     right: 0;
   }
 
@@ -602,7 +612,20 @@ body.nav-open {
   .contact-main {
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 90px;
+    padding-top: 110px;
+  }
+
+  .form-section,
+  .info-section,
+  .form-row,
+  .form-group {
+    min-width: 0;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    min-width: 0;
   }
 
   .contact-title {
