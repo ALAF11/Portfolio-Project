@@ -691,4 +691,39 @@ body.nav-open {
   .navigation {
     padding: 12px 50px;
   }
+
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav-links,
+  .nav-links.open {
+    display: flex;
+    position: static;
+    flex-direction: row;
+    justify-content: flex-start;
+    background: none;
+    backdrop-filter: none;
+    gap: 40px;
+    z-index: auto;
+  }
+
+  .nav-link {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .navigation {
+    padding: 12px 30px;
+  }
+
+  .nav-links,
+  .nav-links.open {
+    gap: 30px;
+  }
+
+  .nav-link {
+    font-size: 16px;
+  }
 }
